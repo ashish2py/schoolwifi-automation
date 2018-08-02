@@ -74,10 +74,11 @@ class SchoolWifiTestSuite(unittest.TestCase):
         sleep(3)
         video_duration = int(v.duration)
         # v.pause()
+        self.driver.save_screenshot("reports/screenshots/{}.png".format(v.current_source.split('/')[-1]))
         while self.give_me_video_current_time(v) < video_duration:
             sys.stdout.write("\rPLAYING {}/{}  :: ".format(self.give_me_video_current_time(v), video_duration))
             sys.stdout.flush()
-            if self.give_me_video_current_time(v) != 0:
+            if self.give_me_video_current_time(v) == 0:
                 print ('VIDEO KHATAM')
                 break
 

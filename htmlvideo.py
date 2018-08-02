@@ -390,7 +390,7 @@ class Audio(HTML5Media):
 
 if __name__ == "__main__":
     from selenium import webdriver
-    
+
     driver = webdriver.Chrome()
 
     driver.get("https://www.w3schools.com/tags/movie.mp4")
