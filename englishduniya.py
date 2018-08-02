@@ -75,10 +75,23 @@ class SchoolWifiTestSuite(unittest.TestCase):
         video_duration = int(v.duration)
         # v.pause()
         self.driver.save_screenshot("reports/screenshots/{}.png".format(v.current_source.split('/')[-1]))
+
+        # user assetEqual
+        last_current_time = self.give_me_video_current_time()
+
         while self.give_me_video_current_time(v) < video_duration:
             sys.stdout.write("\rPLAYING {}/{}  :: ".format(self.give_me_video_current_time(v), video_duration))
             sys.stdout.flush()
+            sleep(2)
+            last_current_time = self.give_me_video_current_time(v)
+
+            if last_current_time == self.give_me_video_current_time(v):
+                self.driver.save_screenshot("reports/screenshots/{}--{}.png".format(v.current_source.split('/')[-1], last_current_time))
+                print ('VIDEO CORRUPTED')
             if self.give_me_video_current_time(v) == 0:
+                print ('VIDEO KHATAM')
+                break
+            else:
                 print ('VIDEO KHATAM')
                 break
 
